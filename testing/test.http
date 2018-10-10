@@ -1,0 +1,45 @@
+
+@host = http://127.0.0.1:8080
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGVsbGlkb3MiOiJ0b3JyZXMiLCJlbWFpbCI6Imp0b3JyZXM5OTBAZ21haWwuY29tIiwiZXhwIjoxNTM5NDY4MTYxLCJmdWxsbmFtZSI6Imp1bGlvIGNlc2FyIHRvcnJlcyIsImlkIjoxLCJub21icmVzIjoianVsaW8gY2VzYXIiLCJyb2xlIjoidXNlciIsInVzdWFyaW8iOiJqdG9ycmVzOTkwIn0.DsuyD7ku-YseKqlggtTyLv0qbR_JS81gS0Awlg3nvvs
+
+###
+OPTIONS {{host}}
+
+###
+GET {{host}}
+
+###
+POST {{host}}
+X-XSRF-TOKEN: Fcp9klPWEj3UwwdPt4OT3pUXi4BBTBDX
+Content-Type: application/json
+
+{
+    "name": "julio"
+}
+
+###
+POST {{host}}/api/v1/auth/login
+X-XSRF-TOKEN: Fcp9klPWEj3UwwdPt4OT3pUXi4BBTBDX
+Content-Type: application/json
+
+{
+    "username": "jtorres990",
+    "password": "12345678"
+}
+
+###
+POST {{host}}/api/v1/auth/register
+X-XSRF-TOKEN: Fcp9klPWEj3UwwdPt4OT3pUXi4BBTBDX
+Content-Type: application/json
+
+{
+    "nombres": "julio cesar",
+    "apellidos": "torres",
+    "email": "jtorres990@gmail.com",
+    "username": "jtorres990",
+    "password": "12345678"
+}
+
+###
+GET {{host}}/api/v1/auth/session
+Authorization: Bearer {{token}}
