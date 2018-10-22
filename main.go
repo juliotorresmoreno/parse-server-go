@@ -9,6 +9,8 @@ import (
 
 	"github.com/juliotorresmoreno/parse-server/config"
 	"github.com/juliotorresmoreno/parse-server/controllers/auth"
+	"github.com/juliotorresmoreno/parse-server/controllers/home"
+	"github.com/juliotorresmoreno/parse-server/controllers/static"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 
@@ -33,6 +35,9 @@ func main() {
 		TokenLookup: "header:X-XSRF-TOKEN",
 	}))
 	e.Use(middleware.Gzip())
+
+	static.Register(e.Group(""))
+	home.Register(e.Group(""))
 
 	api := e.Group("/api/v1")
 
