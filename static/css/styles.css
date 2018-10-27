@@ -1,0 +1,26 @@
+
+
+.container[role="main"] {
+    margin-top: 55px;
+    padding-top: 20px
+}
+
+body {
+    background-size: cover;
+}
+
+.sigin-form {
+    background: white
+}
+
+.footer {
+    margin-top: 20px
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white
+}
+
+nav.bg-primary {
+    background-color: #212529 !important
+}

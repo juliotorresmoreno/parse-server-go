@@ -1,16 +1,38 @@
+{{define "html"}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="/node_modules/popper.js/dist/popper.min.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/static/css/agency.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
+
 <body>
-    {{ define "content" }} Template A {{ end }}
+    {{ .Menu }}
+
+    {{ .Content }}
+
+    {{ .Team }}
+    
+    {{ .Bussisnes }}
+
+    {{ .Contact }}
+
+    {{ .Footer }}
+
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--
+    <script src="/node_modules/turbolinks/dist/turbolinks.js" data-turbolinks-suppress-warning></script>
+    <script>Turbolinks.start()</script>
+    -->
 </body>
+
 </html>
+{{ end }}

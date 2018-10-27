@@ -69,7 +69,21 @@ func (u Users) Exists(id uint) bool {
 		return false
 	}
 	defer conn.Close()
-	exists, err := conn.Where("usuario = ?", id).Exist(&user)
+	exists, err := conn.Where("id = ?", id).Exist(&user)
+	if err != nil {
+		return false
+	}
+	return exists
+}
+
+func (u Users) ExistsUsername(username string) bool {
+	user := User{}
+	conn, err := db.NewConnection()
+	if err != nil {
+		return false
+	}
+	defer conn.Close()
+	exists, err := conn.Where("usuario = ?", username).Exist(&user)
 	if err != nil {
 		return false
 	}
@@ -83,7 +97,7 @@ func (u Users) FindById(id uint) (User, error) {
 		return user, err
 	}
 	defer conn.Close()
-	_, err = conn.Where("usuario = ?", id).Get(&user)
+	_, err = conn.Where("id = ?", id).Get(&user)
 	return user, err
 }
 
@@ -96,4 +110,13 @@ func (u *Users) FindByUserName(username string) (User, error) {
 	defer conn.Close()
 	_, err = conn.Where("usuario = ?", username).Get(&user)
 	return user, err
+}
+
+func (u *Users) Session() (*xorm.Session, error) {
+	conn, err := db.NewConnection()
+	if err != nil {
+		return &xorm.Session{}, err
+	}
+	defer conn.Close()
+	return conn.Table(User{}.TableName()), err
 }

@@ -2,62 +2,65 @@ package home
 
 import (
 	"bytes"
-	"fmt"
 	"html/template"
 	"net/http"
+
+	"github.com/juliotorresmoreno/parse-server/render"
 
 	"github.com/labstack/echo"
 )
 
-func Register(g *echo.Group) {
+var _renderer render.Renderer
+
+func Register(g *echo.Group, renderer render.Renderer) {
+	_renderer = renderer
 	g.GET("/", Home)
+	g.GET("/sign-in", SignIn)
+	g.GET("/sign-up", SignUp)
 }
 
-func getTemplate() (string, error) {
-	tpl := bytes.Buffer{}
-	t, err := template.ParseGlob("templates/template.html")
-	if err != nil {
-		return "", err
-	}
-	if err := t.Execute(&tpl, nil); err != nil {
-		return "", err
-	}
-	return tpl.String(), nil
+type Data struct {
+	Nombre string
 }
 
 func Home(c echo.Context) error {
 	tpl := bytes.Buffer{}
-	/*master, err := getTemplate()
+	t, err := template.ParseGlob("templates/home/home.html")
 	if err != nil {
 		return err
 	}
-	t, err := template.New("content").ParseGlob("templates/home.html")
-	if err != nil {
+	if err := t.ExecuteTemplate(&tpl, "content", Data{"Julio"}); err != nil {
 		return err
 	}
-	render, err := t.Parse(defineDemo)
-	if err != nil {
-		return err
-	}
-	if err := render.Execute(&tpl, nil); err != nil {
-		return err
-	}*/
-	var err error
+	_renderer.Content = tpl.String()
+	c.HTML(http.StatusOK, _renderer.Render())
+	return nil
+}
 
-	var defineDemo = `
-	{{ define "a" }} Template A {{ end }}
-	{{define "b"}} Template B {{end}}
-	`
-	t := template.New("defineActionDemo")
-	t, err = t.Parse(defineDemo)
+func SignUp(c echo.Context) error {
+	tpl := bytes.Buffer{}
+	t, err := template.ParseGlob("templates/home/register.html")
 	if err != nil {
-		fmt.Println("parsing failed: %s", err)
+		return err
 	}
+	if err := t.ExecuteTemplate(&tpl, "content", Data{"Julio"}); err != nil {
+		return err
+	}
+	_renderer.Content = tpl.String()
+	c.HTML(http.StatusOK, _renderer.Render())
+	return nil
+}
 
-	err = t.Execute(&tpl, nil)
+func SignIn(c echo.Context) error {
+	tpl := bytes.Buffer{}
+	t, err := template.ParseGlob("templates/home/login.html")
 	if err != nil {
-		fmt.Println("execution failed: %s", err)
+		return err
 	}
-	c.HTML(http.StatusOK, tpl.String())
+	if err := t.ExecuteTemplate(&tpl, "content", Data{"Julio"}); err != nil {
+		return err
+	}
+	_renderer.Content = tpl.String()
+	c.HTML(http.StatusOK, _renderer.Render())
 	return nil
 }

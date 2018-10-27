@@ -1,0 +1,27 @@
+
+###
+POST https://datafono.clipclap.co/documents/save
+Cookie: _ga=GA1.2.250769898.1539894559; sails.sid=s%3Aifh9Y49Cft5D8jxXed1STkCEp0i6yr5K.%2FCueEz7bfHDEE57xPBFV%2BxmsWuDbd%2FizhYYj8hP5y48
+Origin: https://datafono.clipclap.co
+Host: datafono.clipclap.co
+Accept-Encoding: gzip, deflate, br
+X-CSRF-Token: 3tceAEVL-Fb2yfqcHvRM0u9NS2-9JpyPHs3I
+Accept-Language: es-419,es;q=0.9
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary1cYGZCspSxBHnecU
+Accept: text/plain, */*; q=0.01
+Referer: https://datafono.clipclap.co/documents?register=1
+X-Requested-With: XMLHttpRequest
+Connection: keep-alive
+
+------WebKitFormBoundary1cYGZCspSxBHnecU
+Content-Disposition: form-data; name="field"
+
+CCFrontalFile
+------WebKitFormBoundary1cYGZCspSxBHnecU
+Content-Disposition: form-data; name="file"; filename="Captura de pantalla de 2018-09-17 17-50-03.png"
+Content-Type: image/png
+
+/home/juliotorres/Pictures/8c93f0e1d4d06203e2c8ea79d5029237.jpg
+------WebKitFormBoundary1cYGZCspSxBHnecU--
+

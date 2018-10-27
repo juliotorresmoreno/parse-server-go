@@ -6,6 +6,7 @@ import (
 
 	"github.com/juliotorresmoreno/parse-server/bootstrap"
 	"github.com/juliotorresmoreno/parse-server/db"
+	"github.com/juliotorresmoreno/parse-server/render"
 
 	"github.com/juliotorresmoreno/parse-server/config"
 	"github.com/juliotorresmoreno/parse-server/controllers/auth"
@@ -22,6 +23,7 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	db.SetDefaultConf(config.Database.Driver, config.Database.Dsn)
 
+	renderer := render.NewRenderer()
 	bootstrap.Inicialize()
 	e := echo.New()
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
@@ -37,7 +39,7 @@ func main() {
 	e.Use(middleware.Gzip())
 
 	static.Register(e.Group(""))
-	home.Register(e.Group(""))
+	home.Register(e.Group(""), renderer)
 
 	api := e.Group("/api/v1")
 
